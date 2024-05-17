@@ -66,7 +66,7 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Running the tests
 
-The tests can be run by running:
+The tests can be run by running (will need to have ran poetry install first):
 ```bash
 $ poetry run pytest
 ```

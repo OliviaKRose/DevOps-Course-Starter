@@ -9,7 +9,8 @@ def test_view_model_todo_property_only_shows_item_iff_status_is_todo():
         Item(2, "started", "Doing"),
         Item(3, "completed", "Done")
     ]
-    
+    view_model = ViewModel(items)
+
     # act
     returned_items = view_model.todo_items
     
