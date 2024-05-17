@@ -2,4 +2,56 @@
   hosts: webservers
   remote_user: ec2-user
 
+  vars_prompt:
+
+    - name: trello_api_key
+      prompt: What is your trello api key?
+      private: false
+
+    - name: trello_api_token
+      prompt: What is your trello api token?
+      private: false
+
   tasks:
+    - name: Install the latest version of Git
+      become: yes
+      ansible.builtin.yum:
+        name: git
+        state: latest
+
+    - name: Install Python v3.11
+      become: yes
+      ansible.builtin.yum:
+        name: python311
+        state: latest
+    
+    - name: Install poetry
+      ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
+      args:
+        creates: /home/ec2-user/.local/bin/poetry
+
+    - name: Create App folder
+      become: yes
+      ansible.builtin.shell: mkdir /opt/todoapp
+      args:
+        creates: /opt/todoapp
+    
+    - name: Change App folder owner to ec2-user
+      become: yes
+      ansible.builtin.shell: chown ec2-user /opt/todoapp
+
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: 'https://github.com/OliviaKRose/DevOps-Course-Starter.git'
+        dest: /opt/todoapp
+        version: exercise-4
+
+    - name: Install project dependencies
+      ansible.builtin.shell: poetry install
+      args:
+        chdir: /opt/todoapp
+
+    - name: Create .env file from template
+      ansible.builtin.template:
+        src: /home/ec2-user/.env.j2
+        dest: /opt/todoapp/.env
