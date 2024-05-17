@@ -6,23 +6,18 @@ import requests
 from todo_app.data.item import Item
 
 dotenv.load_dotenv()
-key = os.getenv('TRELLO_API_KEY')
-token = os.getenv('TRELLO_API_TOKEN')
-board_id = os.getenv('TRELLO_BOARD_ID')
-to_do_list_id = os.getenv('TRELLO_TO_DO_LIST_ID')
-doing_list_id = os.getenv('TRELLO_DOING_LIST_ID')
-done_list_id = os.getenv('TRELLO_DONE_LIST_ID')
+
 
 def get_items():
-    url = f"https://api.trello.com/1/boards/{board_id}/lists"
+    url = f"https://api.trello.com/1/boards/{os.getenv('TRELLO_BOARD_ID')}/lists"
 
     headers = {
     "Accept": "*/*"
     }
 
     query = {
-    'key': key,
-    'token': token,
+    'key': os.getenv('TRELLO_API_KEY'),
+    'token': os.getenv('TRELLO_API_TOKEN'),
     'cards': 'open',
     }
 
@@ -52,9 +47,9 @@ def add_item(title):
     }
 
     query = {
-    'idList': to_do_list_id,
-    'key': key,
-    'token': token,
+    'idList': os.getenv('TRELLO_TO_DO_LIST_ID'),
+    'key': os.getenv('TRELLO_API_KEY'),
+    'token': os.getenv('TRELLO_API_TOKEN'),
     'name': title
     }
 
@@ -75,9 +70,9 @@ def update_status_to_done(itemId):
     }
 
     query = {
-    'key': key,
-    'token': token,
-    'idList': done_list_id
+    'key': os.getenv('TRELLO_API_KEY'),
+    'token': os.getenv('TRELLO_API_TOKEN'),
+    'idList': os.getenv('TRELLO_DONE_LIST_ID')
 
     }
 
