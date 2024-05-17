@@ -1,0 +1,5 @@
+- name: run webservers
+  hosts: webservers
+  remote_user: ec2-user
+
+  tasks:
