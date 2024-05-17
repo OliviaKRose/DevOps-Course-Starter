@@ -71,3 +71,12 @@ The tests can be run by running (will need to have ran poetry install first):
 $ poetry run pytest
 ```
 or through VSCode by clicking on the testing tab (beaker icon) and setting up the tests through that.
+
+## Deploying the application to VM with Ansible
+
+To deploy the application via Ansible, copy the execrise-4 folder to the host node, update the inventory.yaml with the host nodes to deploy to and and run:
+```bash
+ansible-playbook playbook.yaml -i inventory.yaml
+```
+
+You will have needed to set up SSH without a password access from the host to the managed nodes
