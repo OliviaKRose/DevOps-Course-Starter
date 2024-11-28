@@ -80,3 +80,21 @@ ansible-playbook playbook.yaml -i inventory.yaml
 ```
 
 You will have needed to set up SSH without a password access from the host to the managed nodes
+
+## Building and deploying the application with Docker
+
+To build the container for local dev please run:
+```bash
+docker build --tag todo-app:dev --target development
+```
+
+To run the container for local dev please run:
+```bash
+docker run --publish 8000:5000 -it --env-file .env .en--mount "type=bind,source=$(pwd)/todo_app,target=/opt/app/todo_app" todo-app:dev
+```
+
+For prod the build and run commands are:
+```bash
+docker build --tag todo-app:prod --target production
+docker run --publish 8000:5000 -it --env-file .env todo-app:prod
+```
