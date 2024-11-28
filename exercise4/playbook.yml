@@ -6,23 +6,19 @@
 
     - name: trello_api_key
       prompt: What is your trello api key?
-      private: false
+      private: true
 
     - name: trello_api_token
       prompt: What is your trello api token?
-      private: false
+      private: true
 
   tasks:
-    - name: Install the latest version of Git
+    - name: Install the latest version of Git & Python v3.11
       become: yes
       ansible.builtin.yum:
-        name: git
-        state: latest
-
-    - name: Install Python v3.11
-      become: yes
-      ansible.builtin.yum:
-        name: python311
+        name: 
+          - git
+          - python 311
         state: latest
     
     - name: Install poetry
