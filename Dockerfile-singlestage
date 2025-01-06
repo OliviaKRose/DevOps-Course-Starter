@@ -1,0 +1,18 @@
+FROM python:3.12
+RUN curl -sSL https://install.python-poetry.org | python3 -
+COPY . /opt/app
+WORKDIR /opt/app
+# need to cd into folder where files have been copied to, lazy method:
+#RUN cd opt/app && poetry install
+#RUN pip install poetry - cheat lazy version to auto add to path
+# add poetry install folder to path
+ENV PATH=$PATH:/root/.local/bin/ 
+RUN poetry install
+#need to add port-forwarding as if just run then can't access in browser
+# docker run --publish 8000:5000 todo-app -> forward thing in container running on port 5000 to localhost:8000 (need more than this though as won't accept external requests)
+# instead change entrypoint command to add --host 0.0.0.0
+# gotcha: put name after options or else they'll be ignored
+ENTRYPOINT poetry run flask run --host 0.0.0.0
+#created a dockerignore file to add things we don't want to copy over i.e. the actual image doesn't have it in even though we still then inject it in
+#however still need .env so instead add --env-file .env to docker run command i'e' it is now
+# docker run --publish 8000:5000 -it --env-file .env todo-app
