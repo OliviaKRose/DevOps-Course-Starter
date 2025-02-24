@@ -20,5 +20,9 @@ FROM base as development
 ENV FLASK_DEBUG=true
 ENTRYPOINT poetry run flask run --host 0.0.0.0
 
+FROM base as test
+ENV FLASK_DEBUG=false
+ENTRYPOINT poetry run pytest
+
 # add bind mount for hot reloading  
 # docker run --publish 8000:5000 -it --env-file .env .en--mount "type=bind,source=$(pwd)/todo_app,target=/opt/app/todo_app" todo-app:dev
