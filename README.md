@@ -72,6 +72,13 @@ $ poetry run pytest
 ```
 or through VSCode by clicking on the testing tab (beaker icon) and setting up the tests through that.
 
+If you'd like to run them through Docker then running the following:
+```bash
+docker build --tag todo-app:test --target test .
+dock run todo-app:test
+```
+
+
 ## Deploying the application to VM with Ansible
 
 To deploy the application via Ansible, copy the execrise-4 folder to the host node, update the inventory.yaml with the host nodes to deploy to and and run:
@@ -85,7 +92,7 @@ You will have needed to set up SSH without a password access from the host to th
 
 To build the container for local dev please run:
 ```bash
-docker build --tag todo-app:dev --target development
+docker build --tag todo-app:dev --target development .
 ```
 
 To run the container for local dev please run:
@@ -95,6 +102,6 @@ docker run --publish 8000:5000 -it --env-file .env .en--mount "type=bind,source=
 
 For prod the build and run commands are:
 ```bash
-docker build --tag todo-app:prod --target production
+docker build --tag todo-app:prod --target production .
 docker run --publish 8000:5000 -it --env-file .env todo-app:prod
 ```

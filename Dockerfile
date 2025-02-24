@@ -22,6 +22,7 @@ ENTRYPOINT poetry run flask run --host 0.0.0.0
 
 FROM base as test
 ENV FLASK_DEBUG=false
+COPY .env.test /opt/app/
 ENTRYPOINT poetry run pytest
 
 # add bind mount for hot reloading  
