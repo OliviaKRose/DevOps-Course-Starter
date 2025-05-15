@@ -6,7 +6,7 @@ WORKDIR /opt/app
 COPY pyproject.toml poetry.toml /opt/app/
 ENV PATH=$PATH:/root/.local/bin/
 RUN poetry install --no-root
-COPY . /opt/app/todo_app
+COPY . /opt/app
 
 
 
