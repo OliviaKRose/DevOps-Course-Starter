@@ -7,7 +7,7 @@ WORKDIR /opt/app
 #RUN pip install poetry - cheat lazy version to auto add to path
 # add poetry install folder to path
 ENV PATH=$PATH:/root/.local/bin/ 
-RUN poetry install
+RUN poetry install --no-root
 #need to add port-forwarding as if just run then can't access in browser
 # docker run --publish 8000:5000 todo-app -> forward thing in container running on port 5000 to localhost:8000 (need more than this though as won't accept external requests)
 # instead change entrypoint command to add --host 0.0.0.0
